@@ -1,22 +1,37 @@
-# Étude Stratégique E-commerce : Application vs Web
+# E-commerce customers: app or website?
 
-Ce projet utilise le **Data Mining** et l'**Apprentissage Supervisé** pour aider une entreprise à choisir entre investir dans son application mobile ou son site web.
+A short supervised-learning exercise from my Big Data & AI master's. A fictional online retailer wants to know where to invest next: its mobile app or its website. The dataset has 500 customers with their average session length, time on the app, time on the website, years as a member, and yearly amount spent.
 
-## Objectifs
-- Analyser le comportement de 500 clients.
-- Prédire le montant dépensé annuellement.
-- Quantifier l'impact de chaque canal de vente via une **Régression Linéaire**.
+The notebook is in French.
 
-## Variables Clés
-- `Duree_session` : Temps moyen en session.
-- `Temps_application` : Temps passé sur l'application.
-- `Temps_Web` : Temps passé sur le site web.
-- `Duree_Adhesion` : Ancienneté du client.
+## What I did
 
-## Outils utilisés
-- Python (Pandas, Numpy)
-- Visualisation (Matplotlib, Seaborn)
-- Scikit-Learn (Modélisation)
+1. Explored the data (distributions, pair plots, correlation matrix).
+2. Fitted a linear regression with `statsmodels` to read the coefficients, then with `scikit-learn` on a 70/30 train/test split.
+3. Checked the residuals and the test metrics.
 
-## Conclusions
-Le modèle permet de déterminer quel canal (Web ou Mobile) génère le plus de valeur ajoutée pour chaque minute supplémentaire passée par un utilisateur sur la plateforme.
+## Results
+
+| Variable | Effect on yearly spend (per extra unit) |
+|---|---|
+| Years as a member | +61 $ |
+| Time on the app (min) | +39 $ |
+| Session length (min) | +26 $ |
+| Time on the website (min) | +0.19 $ |
+
+Test set: MAE 7.2 $, RMSE 8.9 $, R² 0.99. The data is synthetic, which is why the fit is that clean.
+
+**Takeaway:** time on the website brings almost nothing, time on the app does. Loyalty (years as a member) matters even more than either channel.
+
+## Run it
+
+```bash
+pip install pandas numpy matplotlib seaborn statsmodels scikit-learn jupyter
+jupyter notebook "Clients E-commerce/Yassine_Megherbi_Clients_E_Commerce.ipynb"
+```
+
+The CSV sits next to the notebook; update the path in the first `read_csv` cell if you are not running on Colab.
+
+## Author
+
+Yassine Megherbi – [LinkedIn](https://www.linkedin.com/in/yassine-megherbi-b7b277263/) · [GitHub](https://github.com/yasinemegherbi21-byte)
